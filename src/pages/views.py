@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import StreamingHttpResponse, HttpResponse
-from .script.GetHand import V_Camera2, to_gen2, hand_video
+from django.http import StreamingHttpResponse
+from .script.GetHand import V_Camera2, to_gen2
 from .script.camera import VideoCamera, gen
 from .script.mixed import V_Camera, to_gen
-from .script.filters import ProductFilter
+from .filters import ProductFilter
 from products.models import Product
 from partners.forms import CartForm, Test
 from partners.models import Cart, HandSize
@@ -134,5 +134,16 @@ def index(request):
     return render(request, 'movies/index.html', context)
 
 
-def searching_view(request):
-    return  render(request, 'search.html', {})
+def searching_view(request, search_word):
+    queryset = Product.objects.all()  # list of objects
+    product_filter = ProductFilter(queryset=queryset)
+
+    if request.method == "POST":
+        product_filter = ProductFilter(request.POST, queryset=queryset)
+
+    context = {
+        "object_list": queryset,
+        "search_word": search_word,
+        'product_filter': product_filter,
+    }
+    return render(request, 'search.html', context)

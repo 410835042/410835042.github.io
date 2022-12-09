@@ -34,13 +34,13 @@
                     </div>
                 </div>
 
-                {% if request.user.is_staff %}
-                    <ol>
-                        {% for user in user_list %}
-                            <li><a href="delete_user/">{{ user.username }}</a></li>
-                        {% endfor %}
-                    </ol>
-                {% endif %}
+{#                {% if request.user.is_staff %}#}
+{#                    <ol>#}
+{#                        {% for user in user_list %}#}
+{#                            <li><a href="delete_user/">{{ user.username }}</a></li>#}
+{#                        {% endfor %}#}
+{#                    </ol>#}
+{#                {% endif %}#}
             </div>
 
             <hr class="cline"> <!-- 垂直分隔線 -->
@@ -52,7 +52,8 @@
                     <button type="submit"> <a href='handsize/'>手動修改手部比例</a></button>
                     <p style="position: relative; color: gray;display: flex; right: 0;">單位：公分(cm)</p>
 
-                        <div style="display: flex; position: relative;">
+                    <div style="display: flex; position: relative;">
+                        {% if size %}
                             <div style="width: 50%;">
                                 <P>拇指長：{{ size.thumb_length }}</P>
                                 <P>食指長：{{ size.index_length }}</P>
@@ -72,8 +73,8 @@
                                 <P>小指寬：{{ size.little_width }}</P>
                                 <P>手掌寬：{{ size.palm_width }}</P>
                             </div>
-                        </div>
-
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,25 +119,27 @@
                     <button type="submit"> <a href='handsize/'>手動修改手部比例</a></button>
                     <p style="position: relative; justify-content: right; color: gray;">單位：公分(cm)</p>
                     <div style="display: flex; position: relative;">
-                        <div style="width: 50%;">
-                            <P>拇指長：{{ size.thumb_length }}</P>
-                            <P>食指長：{{ size.index_length }}</P>
-                            <P>中指長：{{ size.middle_length }}</P>
-                            <P>無名指長：{{ size.ring_length }}</P>
-                            <P>小指長：{{ size.little_length }}</P>
-                            <P>手掌長：{{ size.palm_length }}</P>
-                        </div>
+                        {% if size  %}
+                            <div style="width: 50%;">
+                                <P>拇指長：{{ size.thumb_length }}</P>
+                                <P>食指長：{{ size.index_length }}</P>
+                                <P>中指長：{{ size.middle_length }}</P>
+                                <P>無名指長：{{ size.ring_length }}</P>
+                                <P>小指長：{{ size.little_length }}</P>
+                                <P>手掌長：{{ size.palm_length }}</P>
+                            </div>
 
-                        <hr class="cline">
+                            <hr class="cline">
 
-                        <div style="width: 50%;">
-                            <P>拇指寬：{{ size.thumb_width }}</P>
-                            <P>食指寬：{{ size.index_width }}</P>
-                            <P>中指寬：{{ size.middle_width }}</P>
-                            <P>無名指寬：{{ size.ring_width }}</P>
-                            <P>小指寬：{{ size.little_width }}</P>
-                            <P>手掌寬：{{ size.palm_width }}</P>
-                        </div>
+                            <div style="width: 50%;">
+                                <P>拇指寬：{{ size.thumb_width }}</P>
+                                <P>食指寬：{{ size.index_width }}</P>
+                                <P>中指寬：{{ size.middle_width }}</P>
+                                <P>無名指寬：{{ size.ring_width }}</P>
+                                <P>小指寬：{{ size.little_width }}</P>
+                                <P>手掌寬：{{ size.palm_width }}</P>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

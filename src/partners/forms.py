@@ -56,7 +56,11 @@ class Test(forms.ModelForm):
 class HSCreateForm(forms.ModelForm):
     class Meta:
         model = HandSize
-        fields = []
+        fields = [
+            'thumb_length', 'index_length', 'middle_length', 'ring_length', 'little_length',
+            'thumb_width', 'index_width', 'middle_width', 'ring_width', 'little_width',
+            'palm_length', 'palm_width'
+        ]
 
 
 class HandSizeForm(forms.ModelForm):

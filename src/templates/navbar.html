@@ -20,12 +20,12 @@
             <div style="margin: 15px 15px 15px 15px;">
                 <label class="switch">
                     <input type="checkbox">
-                    <span class="slider round" onclick="call_counter('../../../GetHand/control')" id="control"></span>
+                    <span class="slider round" onclick="call('../../../GetHand/control')" id="control"></span>
                 </label>
             </div>
         </div>
 
-{#{% url "products:product_all_view" kwargs %}#}
+{#{% url "products:product_all_view"  %}#}
         <form action="" method="post" class="navSearch"> {% csrf_token %}
             <input class="inputSearch" type="search" id="in" placeholder="搜尋商品">
             <button class="buttonSearch" onclick="searching()" id="SearchButton">搜尋</button>
@@ -44,12 +44,19 @@
 
 <script>
     function call_counter(url) { window.open(url); }
+
     function searching(){
         const search_p = document.getElementById('in').value;
-        console.log(search_p)
-        {#window.location.href = '../../../products/all/';#}
+        console.log(search_p);
         window.close();
-        call_counter('../../../../Search/')
+        call_counter('../../../../Search/'+search_p);
+    }
+
+    function call(url) {
+        const current = window.location.href;
+        window.open(current)
+        window.open(url, "_self");
+        window.open(current)
     }
 </script>
 

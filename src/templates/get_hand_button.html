@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <button onclick="call_counter('../GetHand/getting');">偵測手部比例</button>
-{#    <button onclick="video()" id="knocker">Knock</button>#}
-{#    <form action='.' method='POST'>{% csrf_token %}#}
-{#        <button type="submit"> test </button>#}
-{#    </form>#}
+    {% if request.user.identity == 0 or request.user.identity == 1 %}
+        <button onclick="call_counter('../GetHand/getting');">偵測手部比例</button>
+    {% else %}
+        <p style="margin: 0 0 20px 0">＊本功能僅提供會員使用，註冊登入成功即可開始使用</p>
+    {% endif %}
+
 
     <hr class="rline"> <!-- 水平分隔線 position: relative;50px 30px 50px 520px-->
     <div style="display: flex; position: relative;"> <!--下半部 -->
-        <div style="width: 50%;"> <!--下左半部-->
+        <div> <!--下左半部-->
             <div>
                 <h1>操作步驟</h1>
                 <h3>偵測手部比例</h3>
@@ -20,7 +21,7 @@
             </div>
         </div>
 
-        <hr class="cline"> <!-- 垂直分隔線 -->
+{#        <hr class="cline"> <!-- 垂直分隔線 -->#}
 
 {#        <div style="display: flex; align-items: center; flex-wrap: wrap; width: 50%; background-color: black;"> <!--下右半部： 影像-->#}
 {#            <div style="position: relative; margin: auto; justify-content: center;">#}

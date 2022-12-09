@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% load static %}
     <div style="display: flex;">
         <div style="justify-content: space-between; display: flex;"> <!-- 圖片 -->
             {% if object.picture %}
@@ -68,12 +69,16 @@
 
                 {% elif request.user.identity == 0 %}  <!-- 消費者 -->
                     <div style="display: flex; position: relative;">
-
                         <div>
                             {% if object.threeD_model %}
                                 <button type="submit"> <a href='Simulate/'> 模擬配戴 </a></button>
                             {% endif %}
                             <button type="submit"> <a href='../../partners/{{ object.brand.id }}/'> 品牌資訊 </a></button>
+                            <button class="clickme" >購買</button>
+                            <div class="showthis">
+                                <p>＊掃描 QR Code 以前往下訂商品</p>
+                                <img style="width: 200px;" src="{% static 'Texture/QR_Code.jpg' %}">
+                            </div>
                         </div>
                     </div>
                 {% endif %}

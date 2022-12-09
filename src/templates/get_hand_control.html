@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <button onclick="call_counter('../GetHand/control');" href="">手勢操作</button>
+
+    <button onclick="call('../GetHand/control');" href="">手勢操作</button>
+
 
     <hr class="rline"> <!-- 水平分隔線 position: relative;50px 30px 50px 520px-->
     <div style="display: flex; position: relative;"> <!--下半部 -->
@@ -28,6 +30,11 @@
 
 
     <script>
-        function call_counter(url) { window.open(url); }
+        function call(url) {
+            const current = window.location.href;
+            window.open(current)
+            window.open(url, "_self");
+            window.open(current)
+        }
     </script>
 {% endblock %}

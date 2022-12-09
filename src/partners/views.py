@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import BrandForm, LoginForm, RegisterForm, UpdateForm, consumer_updateForm, HandSizeForm, HSCreateForm
+from .forms import BrandForm, LoginForm, RegisterForm, UpdateForm, consumer_updateForm, HandSizeForm, HSCreateForm, consumer_registerForm
 from .models import Brand, Account, Cart, HandSize
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -105,23 +105,33 @@ def hand_size_view(request):
 
 # ---------- 會員部分 ----------
 def sign_up_view(request):
-    form = RegisterForm()
+    r_form = RegisterForm()
     form2 = HSCreateForm()
+
     if request.method == "POST":
         form2 = HandSizeForm(request.POST or None)
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            instance = form2.save(commit=False)
-            instance.account = request.user.id
-            # instance.thumb_length = instance.thumb_width = instance.index_length = instance.index_width = 0.0
-            # instance.middle_length = instance.middle_width = instance.ring_length = instance.ring_width = 0.0
-            # instance.little_length = instance.little_width = instance.palm_length = instance.palm_width = 0.0
-            instance.save()
-            # form.save()
+        r_form = RegisterForm(request.POST)
+        if r_form.is_valid():
+            # instance = form2.save(commit=False)
+            # instance.account = request.user.id
+            # instance.thumb_length = 5
+            # instance.thumb_width = 1
+            # instance.index_length = 5
+            # instance.index_width = 1
+            # instance.middle_length = 5
+            # instance.middle_width = 1
+            # instance.ring_length = 5
+            # instance.ring_width = 1
+            # instance.little_length = 5
+            # instance.little_width = 1
+            # instance.palm_length = 5
+            # instance.palm_width = 5
+            # instance.save()
+            r_form.save()
             return redirect('../index/')
     context = {
         'state': "註冊",
-        'form': form,
+        'form': r_form,
         'form2': form2
     }
     return render(request, 'partners/partner_signup.html', context)
@@ -155,7 +165,10 @@ def information_view(request):
     obj = get_object_or_404(HandSize, account=request.user.id)
     size = HandSize.objects.get(account=request.user.id)
 
-    form = RegisterForm(request.POST or None, instance=request.user)
+    if request.user.identity == 1:
+        form = RegisterForm(request.POST or None, instance=request.user)
+    elif request.user.identity == 0:
+        form = consumer_registerForm(request.POST or None, instance=request.user)
 
     messages.warning(request, '注意！登出前請先妥善存檔')
     context = {

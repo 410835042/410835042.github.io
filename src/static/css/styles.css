@@ -488,7 +488,6 @@ warning{
 }
 
 
-
 /* ----- 收藏清單分隔線 -----*/
 .cline{
     margin: 10px;
@@ -563,6 +562,7 @@ warning{
     width: 60px;
     background-color: #A1D0FF;
     border-radius: 15%;
+    box-shadow: 0 0 12px gray;
     z-index: 9999;
     transition: 0.3s;
 }
@@ -640,8 +640,33 @@ warning{
 
 .helper:hover{
     transform-origin: 100%  50%;
+    box-shadow: none;
     transform: scaleX(3) scaleY(3) translateX(-10px);
     opacity: 1; /* 半透明 */
+}
+
+
+/* ----- QR Code ----- */
+.clickme{
+}
+
+.showthis{
+    position: relative;
+    display: flex;
+    margin: 30px 0;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    max-height: 0;
+    opacity: 0;/*透明度*/
+    transition: 0s;
+}
+
+.clickme:focus + .showthis{
+    border: 8px double #bebebe;
+    opacity: 1;
+    padding: 20px;
+    max-height: 100%;
 }
 
 

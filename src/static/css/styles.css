@@ -563,6 +563,7 @@ warning{
     width: 60px;
     background-color: #A1D0FF;
     border-radius: 15%;
+    box-shadow: 0 0 12px gray;
     z-index: 9999;
     transition: 0.3s;
 }
@@ -640,6 +641,7 @@ warning{
 
 .helper:hover{
     transform-origin: 100%  50%;
+    box-shadow: none;
     transform: scaleX(3) scaleY(3) translateX(-10px);
     opacity: 1; /* 半透明 */
 }

@@ -47,6 +47,6 @@ urlpatterns = [
     path("GetHand/getting", get_hand, name='get_your_hand'),
     path("GetHand/control", hand_control, name='get_hand_and_control'),
     path("GetHand_output/video_stream", video_stream),
-    path("Search/", searching_view, name='searching')
+    path("Search/<str:search_word>", searching_view, name='searching')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
